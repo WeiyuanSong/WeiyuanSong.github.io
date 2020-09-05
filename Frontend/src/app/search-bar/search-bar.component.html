@@ -1,0 +1,32 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Search Movie Here" aria-label="Number" matInput [(ngModel)]="movieInfo" name="movieInfo">
+    <button mat-raised-button (click)="showAutoCompleteResults()">Search</button>
+  </mat-form-field>
+</form>
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Nominations</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ul *ngFor="let movies of nominatedMovies">
+      <li>{{movies.Title}} <button mat-button (click)="remove(movies)">Remove</button></li>
+    </ul>
+  </mat-card-content>
+</mat-card>
+
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let option of options">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{option.Title}}</mat-card-title>
+        <mat-card-subtitle>{{option.Year}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-sm-image src={{option.Poster}} alt="Photo of {{option.Title}}">
+      <mat-card-actions>
+        <button mat-button [disabled]="!showNominateButton(option)" (click)="addToNominateList(option)">Nominate</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
